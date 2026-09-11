@@ -3,33 +3,317 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello, Aneesh</title>
+    <meta
+      name="description"
+      content="A cosmic welcome for Aneesh, drifting among the stars."
+    />
+    <title>Aneesh — Into the Cosmos</title>
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600&display=swap");
+
       :root {
-        color-scheme: light;
-        font-family: Georgia, "Times New Roman", serif;
-        background: #f7f5f0;
-        color: #20201e;
+        color-scheme: dark;
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        background: #03050c;
+        color: #f6f3ea;
+      }
+
+      * {
+        box-sizing: border-box;
       }
 
       body {
-        display: grid;
         min-height: 100vh;
         margin: 0;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 50% 40%, rgba(41, 46, 84, 0.3), transparent 34%),
+          #03050c;
+      }
+
+      .sky,
+      .sky::before,
+      .sky::after {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .sky {
+        opacity: 0.75;
+        background-image:
+          radial-gradient(circle at 12% 18%, #fff 0 1px, transparent 1.5px),
+          radial-gradient(circle at 79% 13%, #fff 0 1px, transparent 1.5px),
+          radial-gradient(circle at 88% 58%, #fff 0 1px, transparent 1.5px),
+          radial-gradient(circle at 30% 72%, #fff 0 1px, transparent 1.5px),
+          radial-gradient(circle at 54% 86%, #fff 0 1px, transparent 1.5px);
+        background-size: 240px 210px, 310px 270px, 230px 260px, 370px 330px, 420px 380px;
+      }
+
+      .sky::before {
+        content: "";
+        background-image:
+          radial-gradient(circle, #9bd7ff 0 1px, transparent 1.8px),
+          radial-gradient(circle, #fff 0 1.5px, transparent 2px);
+        background-position: 35px 65px, 145px 30px;
+        background-size: 290px 310px, 430px 390px;
+        animation: shimmer 5s ease-in-out infinite alternate;
+      }
+
+      .sky::after {
+        content: "";
+        background: radial-gradient(ellipse at center, transparent 35%, rgba(0, 0, 0, 0.72) 100%);
+      }
+
+      .brand {
+        position: fixed;
+        top: 30px;
+        left: 42px;
+        z-index: 4;
+        color: #f7f3e8;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+      }
+
+      .coordinates {
+        position: fixed;
+        top: 34px;
+        right: 42px;
+        z-index: 4;
+        color: #9d9dac;
+        font-family: "DM Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.17em;
+        text-transform: uppercase;
+      }
+
+      main {
+        position: relative;
+        display: grid;
+        min-height: 100vh;
+        padding: 5rem 2rem;
         place-items: center;
+        isolation: isolate;
+      }
+
+      .orbit-system {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: min(74vw, 820px);
+        aspect-ratio: 1;
+        border: 1px solid rgba(255, 255, 255, 0.13);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .orbit-system::before,
+      .orbit-system::after {
+        content: "";
+        position: absolute;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 50%;
+      }
+
+      .orbit-system::before {
+        inset: 12%;
+      }
+
+      .orbit-system::after {
+        inset: 27%;
+      }
+
+      .planet-orbit {
+        position: absolute;
+        inset: -1px;
+        animation: orbit 32s linear infinite;
+      }
+
+      .planet {
+        position: absolute;
+        top: 11%;
+        right: 11%;
+        width: clamp(58px, 7vw, 94px);
+        aspect-ratio: 1;
+        overflow: hidden;
+        border-radius: 50%;
+        background:
+          linear-gradient(160deg, transparent 45%, rgba(255, 255, 255, 0.18) 46% 50%, transparent 51%),
+          radial-gradient(circle at 32% 28%, #e8cbb5 0 8%, #956d8e 26%, #45325f 52%, #111429 78%);
+        box-shadow:
+          inset -18px -14px 22px rgba(0, 0, 0, 0.55),
+          0 0 42px rgba(155, 134, 204, 0.25);
+        animation: counter-orbit 32s linear infinite;
+      }
+
+      .planet::after {
+        content: "";
+        position: absolute;
+        inset: 53% -35% auto;
+        height: 12%;
+        border: 4px solid rgba(217, 196, 226, 0.5);
+        border-radius: 50%;
+        transform: rotate(-13deg);
+      }
+
+      .hero {
+        position: relative;
+        z-index: 2;
+        max-width: 900px;
+        text-align: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin: 0 0 1.8rem;
+        color: #b6b4c0;
+        font-family: "DM Mono", monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #a9e5ff;
+        box-shadow: 0 0 12px #a9e5ff;
+        content: "";
       }
 
       h1 {
         margin: 0;
-        font-size: clamp(2.5rem, 8vw, 5rem);
+        font-size: clamp(4.25rem, 13vw, 10rem);
         font-weight: 400;
-        letter-spacing: -0.04em;
+        letter-spacing: -0.075em;
+        line-height: 0.78;
+      }
+
+      h1 span {
+        display: block;
+        margin-top: 0.3em;
+        color: transparent;
+        font-size: 0.65em;
+        font-style: italic;
+        letter-spacing: -0.045em;
+        -webkit-text-stroke: 1px rgba(246, 243, 234, 0.65);
+      }
+
+      .message {
+        max-width: 430px;
+        margin: 2.4rem auto 0;
+        color: #aaa8b3;
+        font-size: clamp(0.85rem, 1.2vw, 1rem);
+        letter-spacing: 0.04em;
+        line-height: 1.7;
+      }
+
+      .signal {
+        position: fixed;
+        bottom: 34px;
+        left: 42px;
+        z-index: 4;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: #858492;
+        font-family: "DM Mono", monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .signal-bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 2px;
+        height: 12px;
+      }
+
+      .signal-bars i {
+        width: 2px;
+        background: #a9e5ff;
+      }
+
+      .signal-bars i:nth-child(1) { height: 4px; }
+      .signal-bars i:nth-child(2) { height: 7px; }
+      .signal-bars i:nth-child(3) { height: 10px; }
+
+      .mission {
+        position: fixed;
+        right: 42px;
+        bottom: 30px;
+        z-index: 4;
+        color: #858492;
+        font-family: "DM Mono", monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
+        text-align: right;
+        text-transform: uppercase;
+      }
+
+      @keyframes orbit {
+        to { transform: rotate(360deg); }
+      }
+
+      @keyframes counter-orbit {
+        to { transform: rotate(-360deg); }
+      }
+
+      @keyframes shimmer {
+        from { opacity: 0.35; }
+        to { opacity: 0.8; }
+      }
+
+      @media (max-width: 640px) {
+        .brand { top: 24px; left: 24px; }
+        .coordinates { top: 27px; right: 24px; }
+        .coordinates span { display: none; }
+        .orbit-system { width: 112vw; }
+        .signal { bottom: 24px; left: 24px; }
+        .mission { right: 24px; bottom: 22px; }
+        .message { max-width: 320px; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .planet-orbit,
+        .planet,
+        .sky::before { animation: none; }
       }
     </style>
   </head>
   <body>
+    <div class="sky" aria-hidden="true"></div>
+    <header>
+      <div class="brand">Aneesh</div>
+      <div class="coordinates"><span>Sector</span> 42.0719° N / 87.6877° W</div>
+    </header>
+
     <main>
-      <h1>Hello, Aneesh</h1>
+      <div class="orbit-system" aria-hidden="true">
+        <div class="planet-orbit"><div class="planet"></div></div>
+      </div>
+
+      <section class="hero" aria-labelledby="welcome-title">
+        <p class="eyebrow">Transmission received</p>
+        <h1 id="welcome-title">Hello,<span>Aneesh</span></h1>
+        <p class="message">
+          The universe is vast, the signal is clear, and your next great adventure is waiting among the stars.
+        </p>
+      </section>
     </main>
+
+    <footer>
+      <div class="signal">
+        <span class="signal-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+        Signal strong
+      </div>
+      <div class="mission">Mission 001<br />Orbital welcome</div>
+    </footer>
   </body>
 </html>
